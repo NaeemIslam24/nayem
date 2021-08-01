@@ -716,45 +716,34 @@
 
                         <ul class="portfolio-filters">
 
-                          <li class="active">
-                            <a href="{% url 'portfolio' %}"  data-group="category_all">Full View</a>
-                          </li>
+                    
 
                           <li class="active">
                             <a class="filter btn btn-sm btn-link" data-group="category_all">All</a>
                           </li>
+                          {% for port in portfolio %}
                           <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_detailed">Detailed</a>
+                            <a class="filter btn btn-sm btn-link" data-group="category_detailed">{{port.category}}</a>
                           </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_mockups">Mockups</a>
-                          </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_soundcloud">SoundCloud</a>
-                          </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_vimeo-videos">Vimeo Videos</a>
-                          </li>
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_youtube-videos">YouTube Videos</a>
-                          </li>
+                          {% endfor %}
                         </ul>
 
                         <!-- Portfolio Grid -->
                         <div class="portfolio-grid three-columns">
+                          {% for port in portfolio %}
 
                           <figure class="item standard" data-groups='["category_all", "category_detailed"]'>
                             <div class="portfolio-item-img">
-                              <img src="{% static 'img/portfolio/2.jpg' %}" alt="Media Project 2" title="" />
-                              <a href="{% url 'portfolio' %}" class="ajax-page-load"></a>
+                              <img src="{{port.image.url}}" alt="Media Project 2" title="" />
+                              <a href="{% url 'portfolio' port.id port.title %}"></a>
                             </div>
 
                             <i class="far fa-file-alt"></i>
-                            <h4 class="name">Detailed Project 2</h4>
+                            <h4 class="name">{{port.title}}</h4>
                             <span class="category">Detailed</span>
                           </figure>
 
-          
+                           {% endfor %}
                         </div>
                       </div>
                       <!-- End of Portfolio Content -->
