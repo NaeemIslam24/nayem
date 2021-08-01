@@ -23,11 +23,11 @@
           <header id="site_header" class="header mobile-menu-hide">
             <div class="header-content">
               <div class="header-photo">
-                <img src="{% static 'img/main_photo.jpg' %}" alt="Alex Smith">
+                <img src="{{home.0.profile_image.url}}" alt="Alex Smith">
               </div>
               <div class="header-titles">
-                <h2>NAYEM</h2>
-                <h4>Back-end Developer</h4>
+                <h2>{{home.0.profile_name}}</h2>
+                <h4>{{home.0.profile_bio}}</h4>
               </div>
             </div>
 
@@ -72,17 +72,18 @@
 
             <div class="social-links">
               <ul>
-                <li><a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="{{home.0.github}}" target="_blank"><i class="fab fa-github"></i></a></li>
+                <li><a href="{{home.0.linkedin}}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="{{home.0.facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="{{home.0.twitter}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
               </ul>
             </div>
-
+              
             <div class="header-buttons">
-              <a href="#" target="_blank" class="btn btn-primary">Download CV</a>
+              <a href="/media/{{home.0.add_cv}}" target="_blank" class="btn btn-primary">Download CV</a>
             </div>
-
-            <div class="copyrights">© 2020 All rights reserved.</div>
+        
+            <div class="copyrights">{{home.0.footer_text}}</div>
           </header>
 
           <!-- Mobile Navigation -->
@@ -109,15 +110,13 @@
                     <div class="row">
                       <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="title-block">
-                          <h2>NAYEM <span style="color:orange" >ISLAM</span></h2>
-                          <div class="owl-carousel text-rotation">                                    
+                          <h2>{{home.0.wallpaper_name}} <span style="color:orange" >{{home.0.wallpaper_last_name}}</span></h2>
+                          <div class="owl-carousel text-rotation"> 
+                            {% for bio_data in bio %}
                             <div class="item">
-                              <div class="sp-subtitle">Back-End Developer With Django</div>
+                              <div class="sp-subtitle">{{bio_data.bio}}</div>
                             </div>
-                            
-                            <div class="item">
-                              <div class="sp-subtitle">Frontend-Developer With React</div>
-                            </div>
+                            {% endfor %}
                           </div>
                         </div>
                       </div>
@@ -137,7 +136,7 @@
                   <!-- Personal Information -->
                   <div class="row">
                     <div class="col-xs-12 col-sm-7">
-                      <p>Proin volutpat mauris ac pellentesque pharetra. Suspendisse congue elit vel odio suscipit, sit amet tempor nisl imperdiet. Quisque ex justo, faucibus ut mi in, condimentum finibus dolor. Aliquam vitae hendrerit dolor, eget imperdiet mauris. Maecenas et ante id ipsum condimentum dictum et vel massa. Ut in imperdiet dolor, vel consectetur dui.</p>
+                      <p>{{about.0.description}}</p>
                     </div>
 
                     <div class="col-xs-12 col-sm-5">
@@ -145,27 +144,27 @@
                         <ul>
                           <li>
                             <span class="title">Age</span>
-                            <span class="value">32</span>
+                            <span class="value">{{about.0.age}}</span>
                           </li>
 
                           <li>
                             <span class="title">Residence</span>
-                            <span class="value">USA</span>
+                            <span class="value">{{about.0.residence}}</span>
                           </li>
 
                           <li>
                             <span class="title">Address</span>
-                            <span class="value">88 Some Street, Some Town</span>
+                            <span class="value">{{about.0.address}}</span>
                           </li>
 
                           <li>
                             <span class="title">e-mail</span>
-                            <span class="value">email@example.com</span>
+                            <span class="value">{{about.0.email}}</span>
                           </li>
 
                           <li>
                             <span class="title">Phone</span>
-                            <span class="value">+0123 123 456 789</span>
+                            <span class="value">{{about.0.phone}}</span>
                           </li>
                         </ul>
                       </div>
@@ -250,61 +249,26 @@
                     <div class="col-xs-12 col-sm-12">
                       <div class="testimonials owl-carousel">
                         <!-- Testimonial 1 -->
+                        {% for testi in testimonial %}
                         <div class="testimonial">
                           <div class="img">
-                            <img src="{% static 'img/testimonials/testimonial-1.jpg' %}" alt="Alex Smith">
+                            <img src="{{testi.image.url}}" alt="Alex Smith">
                           </div>
                           <div class="text">
-                            <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor. Nulla condimentum nunc sit amet urna tempus finibus. Duis mollis leo id ligula pellentesque, at vehicula dui ultrices.</p>
+                            <p>{{testi.comment}}</p>
                           </div>
 
                           <div class="author-info">
-                            <h4 class="author">Julia Hickman</h4>
-                            <h5 class="company">Omni Source</h5>
+                            <h4 class="author">{{testi.client_name}}</h4>
+                            <h5 class="company">{{testi.company}}</h5>
                             <div class="icon">
                               <i class="fas fa-quote-right"></i>
                             </div>
                           </div>
                         </div>
                         <!-- End of Testimonial 1 -->
+                        {% endfor %}
 
-                        <!-- Testimonial 2 -->
-                        <div class="testimonial">
-                          <div class="img">
-                            <img src="{% static 'img/testimonials/testimonial-2.jpg' %}" alt="Alex Smith">
-                          </div>
-                          <div class="text">
-                            <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor. Nulla condimentum nunc sit amet urna tempus finibus. Duis mollis leo id ligula pellentesque, at vehicula dui ultrices.</p>
-                          </div>
-
-                          <div class="author-info">
-                            <h4 class="author">Robert Watkins</h4>
-                            <h5 class="company">Endicott Shoes</h5>
-                            <div class="icon">
-                              <i class="fas fa-quote-right"></i>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Testimonial 2 -->
-
-                        <!-- Testimonial 3 -->
-                        <div class="testimonial">
-                          <div class="img">
-                            <img src="{% static 'img/testimonials/testimonial-3.jpg' %}" alt="Alex Smith">
-                          </div>
-                          <div class="text">
-                            <p>Vivamus at molestie dui, eu ornare orci. Curabitur vel egestas dolor. Nulla condimentum nunc sit amet urna tempus finibus. Duis mollis leo id ligula pellentesque, at vehicula dui ultrices.</p>
-                          </div>
-
-                          <div class="author-info">
-                            <h4 class="author">Kristin Carroll</h4>
-                            <h5 class="company">Helping Hand</h5>
-                            <div class="icon">
-                              <i class="fas fa-quote-right"></i>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Testimonial 3 -->
                       </div>
                     </div>
                   </div>
@@ -324,49 +288,14 @@
                   <div class="row">
                     <div class="col-xs-12 col-sm-12">
                       <div class="clients owl-carousel">
-                        
+                        {% for client in clients %}
                         <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="{% static 'img/clients/client-1.png' %}" alt="Logo">
+                          <a href="{{client.url}}" target="_blank" title="Logo">
+                            <img src="{{client.company_logo.url}}" alt="Logo">
                           </a>
                         </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="{% static 'img/clients/client-2.png' %}" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="{% static 'img/clients/client-3.png' %}" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="{% static 'img/clients/client-4.png' %}" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="{% static 'img/clients/client-5.png' %}" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="{% static 'img/clients/client-6.png' %}" alt="Logo">
-                          </a>
-                        </div>
-
-                        <div class="client-block">
-                          <a href="#" target="_blank" title="Logo">
-                            <img src="{% static 'img/clients/client-7.png' %}" alt="Logo">
-                          </a>
-                        </div>
-  
+                        {% endfor %}
+                  
                       </div>
                     </div>
                   </div>
@@ -786,6 +715,11 @@
                       <div class="portfolio-content">
 
                         <ul class="portfolio-filters">
+
+                          <li class="active">
+                            <a href="{% url 'portfolio' %}"  data-group="category_all">Full View</a>
+                          </li>
+
                           <li class="active">
                             <a class="filter btn btn-sm btn-link" data-group="category_all">All</a>
                           </li>
@@ -808,22 +742,11 @@
 
                         <!-- Portfolio Grid -->
                         <div class="portfolio-grid three-columns">
-                          
-                          <figure class="item lbaudio" data-groups='["category_all", "category_soundcloud"]'>
-                            <div class="portfolio-item-img">
-                              <img src="{% static 'img/portfolio/1.jpg' %}" alt="SoundCloud Audio" title="" />
-                              <a href="{% static 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/221650664&#038;color=%23ff5500&#038;auto_play=false&#038;hide_related=false&#038;show_comments=true&#038;show_user=true&#038;show_reposts=false&#038;show_teaser=true&#038;visual=true' %}" class="lightbox mfp-iframe" title="SoundCloud Audio"></a>
-                            </div>
-
-                            <i class="fa fa-volume-up"></i>
-                            <h4 class="name">SoundCloud Audio</h4>
-                            <span class="category">SoundCloud</span>
-                          </figure>
 
                           <figure class="item standard" data-groups='["category_all", "category_detailed"]'>
                             <div class="portfolio-item-img">
                               <img src="{% static 'img/portfolio/2.jpg' %}" alt="Media Project 2" title="" />
-                              <a href="{% static 'portfolio-1.html' %}" class="ajax-page-load"></a>
+                              <a href="{% url 'portfolio' %}" class="ajax-page-load"></a>
                             </div>
 
                             <i class="far fa-file-alt"></i>
@@ -831,49 +754,7 @@
                             <span class="category">Detailed</span>
                           </figure>
 
-                          <figure class="item lbvideo" data-groups='["category_all", "category_vimeo-videos"]'>
-                            <div class="portfolio-item-img">
-                              <img src="{% static 'img/portfolio/3.jpg' %}" alt="Vimeo Video 1" title="" />
-                              <a href="{% static 'https://player.vimeo.com/video/158284739' %}" class="lightbox mfp-iframe" title="Vimeo Video 1"></a>
-                            </div>
-
-                            <i class="fas fa-video"></i>
-                            <h4 class="name">Vimeo Video 1</h4>
-                            <span class="category">Vimeo Videos</span>
-                          </figure>
-
-                          <figure class="item standard" data-groups='["category_all", "category_detailed"]'>
-                            <div class="portfolio-item-img">
-                              <img src="{% static 'img/portfolio/4.jpg' %}" alt="Media Project 1" title="" />
-                              <a href="portfolio-1.html" class="ajax-page-load"></a>
-                            </div>
-
-                            <i class="far fa-file-alt"></i>
-                            <h4 class="name">Detailed Project 1</h4>
-                            <span class="category">Detailed</span>
-                          </figure>
-
-                          <figure class="item lbimage" data-groups='["category_all", "category_mockups"]'>
-                            <div class="portfolio-item-img">
-                              <img src="{% static 'img/portfolio/5.jpg' %}" alt="Mockup Design 1" title="" />
-                              <a class="lightbox" title="Mockup Design 1" href="img/portfolio/full/5.jpg"></a>
-                            </div>
-
-                            <i class="far fa-image"></i>
-                            <h4 class="name">Mockup Design 1</h4>
-                            <span class="category">Mockups</span>
-                          </figure>
-
-                          <figure class="item lbvideo" data-groups='["category_all", "category_youtube-videos"]'>
-                            <div class="portfolio-item-img">
-                              <img src="{% static 'img/portfolio/6.jpg' %}" alt="YouTube Video 1" title="" />
-                              <a href="{% static 'https://www.youtube.com/embed/bg0gv2YpIok' %}" class="lightbox mfp-iframe" title="YouTube Video 1"></a>
-                            </div>
-
-                            <i class="fas fa-video"></i>
-                            <h4 class="name">YouTube Video 1</h4>
-                            <span class="category">YouTube Videos</span>
-                          </figure>
+          
                         </div>
                       </div>
                       <!-- End of Portfolio Content -->
