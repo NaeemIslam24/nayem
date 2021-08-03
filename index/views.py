@@ -3,6 +3,7 @@ from .models import *
 from about.models import *
 from portfolio.models import *
 from blog.models import *
+from contact.models import *
 
 # Create your views here.
 def index(request):
@@ -16,6 +17,18 @@ def index(request):
     client = Client.objects.all()
     portfolio = Portfolio.objects.all()
     post = Post.objects.all()
+    contact = Contact.objects.all()
+
+    if request.method == "POST":
+
+        contact_form = request.POST
+        contact_data = Contact_Form(
+            name=contact_form["name"],
+            email=contact_form["email"],
+            subject=contact_form["subject"],
+            message=contact_form["message"],
+        )
+        contact_data.save()
 
     context = {
         "home": home,
@@ -26,6 +39,7 @@ def index(request):
         "clients": client,
         "testimonial": testimonial,
         "posts": post,
+        "contact": contact,
     }
 
     return render(request, template_name=template, context=context)
