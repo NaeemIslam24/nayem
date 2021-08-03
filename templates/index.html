@@ -700,6 +700,8 @@
                 </div>
               </section>
               <!-- End of Resume Subpage -->
+               
+      
 
               <!-- Portfolio Subpage -->
               <section data-id="portfolio" class="animated-section">
@@ -708,49 +710,41 @@
                 </div>
 
                 <div class="section-content">
-
                   <div class="row">
                     <div class="col-xs-12 col-sm-12">
-                      <!-- Portfolio Content -->
-                      <div class="portfolio-content">
+                      <div class="blog-masonry two-columns clearfix">
+                        
+                        <!-- Blog Post 1 -->
 
-                        <ul class="portfolio-filters">
-
-                    
-
-                          <li class="active">
-                            <a class="filter btn btn-sm btn-link" data-group="category_all">All</a>
-                          </li>
-                          {% for port in portfolio %}
-                          <li>
-                            <a class="filter btn btn-sm btn-link" data-group="category_detailed">{{port.category}}</a>
-                          </li>
-                          {% endfor %}
-                        </ul>
-
-                        <!-- Portfolio Grid -->
-                        <div class="portfolio-grid three-columns">
-                          {% for port in portfolio %}
-
-                          <figure class="item standard" data-groups='["category_all", "category_detailed"]'>
-                            <div class="portfolio-item-img">
-                              <img src="{{port.image.url}}" alt="Media Project 2" title="" />
-                              <a href="{% url 'portfolio' port.id port.title %}"></a>
+                        {% for port in portfolios %}
+                        <div class="item post-1">
+                          <div class="blog-card">
+                            <div class="media-block">
+                              <div class="category">
+                                <a href="#" title="View all posts in Design">{{port.category}}</a>
+                              </div>
+                              <a href="{% url 'portfolio' port.id port.slug %}">
+                                <img src="{{port.image.url}}" class="size-blog-masonry-image-two-c" alt="Why I Switched to Sketch For UI Design" title="" />
+                                <div class="mask"></div>
+                              </a>
                             </div>
-
-                            <i class="far fa-file-alt"></i>
-                            <h4 class="name">{{port.title}}</h4>
-                            <span class="category">Detailed</span>
-                          </figure>
-
-                           {% endfor %}
+                            <div class="post-info">
+                              <div class="post-date">{{port.published}}</div>
+                              <a href="{% url 'portfolio' port.id port.slug %}">
+                                <h4 class="blog-item-title">{{port.title}}</h4>
+                              </a>
+                            </div>
+                          </div>
                         </div>
+                        {% endfor %}
+                        <!-- End of Blog Post 1 -->
                       </div>
-                      <!-- End of Portfolio Content -->
                     </div>
                   </div>
                 </div>
               </section>
+                <!-- end of Portfolio Content -->
+           
               <!-- End of Portfolio Subpage -->
 
               <!-- Blog Subpage -->
@@ -765,98 +759,36 @@
                       <div class="blog-masonry two-columns clearfix">
                         
                         <!-- Blog Post 1 -->
+
+                        {% for post in posts %}
                         <div class="item post-1">
                           <div class="blog-card">
                             <div class="media-block">
                               <div class="category">
                                 <a href="#" title="View all posts in Design">Design</a>
                               </div>
-                              <a href="blog-post-1.html">
-                                <img src="{% static 'img/blog/blog_post_1.jpg' %}" class="size-blog-masonry-image-two-c" alt="Why I Switched to Sketch For UI Design" title="" />
+                              <a href="{% url 'post' post.id post.slug %}">
+                                <img src="{{post.thumbnail.url}}" class="size-blog-masonry-image-two-c" alt="Why I Switched to Sketch For UI Design" title="" />
                                 <div class="mask"></div>
                               </a>
                             </div>
                             <div class="post-info">
-                              <div class="post-date">05 Mar 2020</div>
-                              <a href="blog-post-1.html">
-                                <h4 class="blog-item-title">Why I Switched to Sketch For UI Design</h4>
+                              <div class="post-date">{{post.published}}</div>
+                              <a href="{% url 'post' post.id post.slug %}">
+                                <h4 class="blog-item-title">{{post.headline}}</h4>
                               </a>
                             </div>
                           </div>
                         </div>
+                        {% endfor %}
                         <!-- End of Blog Post 1 -->
+                        
 
-                        <!-- Blog Post 2 -->
-                        <div class="item post-2">
-                          <div class="blog-card">
-                            <div class="media-block">
-                              <div class="category">
-                                <a href="#" title="View all posts in UI">UI</a>
-                              </div>
-                              <a href="{% static 'blog-post-1.html' %}">
-                                <img src="{% static 'img/blog/blog_post_2.jpg' %}" class="size-blog-masonry-image-two-c" alt="Best Practices for Animated Progress Indicators" title="" />
-                                <div class="mask"></div>
-                              </a>
-                            </div>
-                            <div class="post-info">
-                              <div class="post-date">23 Feb 2020</div>
-                              <a href="{% static 'blog-post-1.html' %}">
-                                <h4 class="blog-item-title">Best Practices for Animated Progress Indicators</h4>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Blog Post 2 -->
 
-                        <!-- Blog Post 3 -->
-                        <div class="item post-1">
-                          <div class="blog-card">
-                            <div class="media-block">
-                              <div class="category">
-                                <a href="#" title="View all posts in Design">Design</a>
-                              </div>
-                              <a href="{% static 'blog-post-1.html' %}">
-                                <img src="{% static 'img/blog/blog_post_3.jpg' %}" class="size-blog-masonry-image-two-c" alt="Designing the Perfect Feature Comparison Table" title="" />
-                                <div class="mask"></div>
-                              </a>
-                            </div>
-                            <div class="post-info">
-                              <div class="post-date">06 Feb 2020</div>
-                              <a href="{% static 'blog-post-1.html' %}">
-                                <h4 class="blog-item-title">Designing the Perfect Feature Comparison Table</h4>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Blog Post 3 -->
-
-                        <!-- Blog Post 4 -->
-                        <div class="item post-2">
-                          <div class="blog-card">
-                            <div class="media-block">
-                              <div class="category">
-                                <a href="#" title="View all posts in E-Commerce">UI</a>
-                              </div>
-                              <a href="{% static 'blog-post-1.html' %}">
-                                <img src="{% static 'img/blog/blog_post_4.jpg' %}" class="size-blog-masonry-image-two-c" alt="An Overview of E-Commerce Platforms" title="" />
-                                <div class="mask"></div>
-                              </a>
-                            </div>
-                            <div class="post-info">
-                              <div class="post-date">07 Jan 2020</div>
-                              <a href="{% static 'blog-post-1.html' %}">
-                                <h4 class="blog-item-title">An Overview of E-Commerce Platforms</h4>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Blog Post 4 -->
                       </div>
                     </div>
                   </div>
                 </div>
-
-
               </section>
               <!-- End of Blog Subpage -->
 

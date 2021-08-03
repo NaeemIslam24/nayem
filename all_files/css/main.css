@@ -1549,10 +1549,7 @@ textarea.form-control, textarea.form-control:focus {
   z-index: 3;
 }
 
-.portfolio-item-img {
-  position: relative;
-  overflow: hidden;
-}
+
 
 .portfolio-grid figure .portfolio-item-img:after {
   content: '';

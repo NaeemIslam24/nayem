@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from about.models import *
 from portfolio.models import *
+from blog.models import *
 
 # Create your views here.
 def index(request):
@@ -14,15 +15,17 @@ def index(request):
     testimonial = Testimonial.objects.all()
     client = Client.objects.all()
     portfolio = Portfolio.objects.all()
+    post = Post.objects.all()
 
     context = {
         "home": home,
-        "portfolio": portfolio,
+        "portfolios": portfolio,
         "bio": bio,
         "about": about,
         "i_do": i_do,
         "clients": client,
         "testimonial": testimonial,
+        "posts": post,
     }
 
     return render(request, template_name=template, context=context)
@@ -33,10 +36,27 @@ def portfolio(request, pk, sl):
 
     portfolio = Portfolio.objects.all()
 
-    detail = get_object_or_404(portfolio, id=pk, title=sl)
+    detail = get_object_or_404(portfolio, id=pk, slug=sl)
 
     context = {
         "portfolio": detail,
+    }
+
+    return render(request, template_name=template, context=context)
+
+
+def post(request, pk, sl):
+
+    template = "blog-post-1.html"
+
+    post = Post.objects.all()
+    home = Home.objects.all()
+
+    detail = get_object_or_404(post, id=pk, slug=sl)
+
+    context = {
+        "post": detail,
+        "home": home,
     }
 
     return render(request, template_name=template, context=context)
