@@ -128,7 +128,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 STATICFILES_DIRS = [
-    BASE_DIR / "all_files",
+    BASE_DIR / "static",
 ]
 
 MEDIA_URL = "/media/"
